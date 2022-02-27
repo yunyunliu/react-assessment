@@ -52,3 +52,29 @@ table {
   right: 10px;
   bottom: 10px;
 } */
+
+.measurements {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel {
+  border-radius: 3px;
+  flex-basis: 25%;
+  border: 1px solid black;
+  padding: 15px;
+  flex-direction: column;
+}
+
+.mid-panel {
+  flex-basis: 50%;
+  border: 1px solid black;
+  margin: 0 20px;
+  padding: 20px;
+  border-radius: 3px;
+}
+
+.details {
+  display: flex;
+  margin-top: 20px;
+}

@@ -1,11 +1,5 @@
-const Card = ({ cardData, setId }) => {
+const Card = ({ cardData, setId, formatDate }) => {
   const { location, city, firstUpdated, lastUpdated, count, parameters, sourceName, id } = cardData;
-
-  const formatDate = dateString => {
-    const formatted = dateString.split('T')[0];
-    const replaced = formatted.replaceAll('-', '/');
-    return replaced;
-  };
 
   const formatParameters = params => {
     const results = params.join(', ');
