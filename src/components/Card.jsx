@@ -12,34 +12,32 @@ const Card = ({ cardData }) => {
     return results;
   };
   return (
-       <li className='card'>
-        <h2 style={{ fontSize: 26 }}>{location}</h2>
-        <div>in <span style={{ fontWeight: 600, fontSize: 20, marginLeft: 5 }}>{city}</span></div>
-        <div>
-          <table>
-            <tbody>
-              <tr>
-                <td>Collection Dates</td>
-                <td style={{ paddingLeft: 15 }}>{formatDate(firstUpdated)} - {formatDate(lastUpdated)}</td>
-              </tr>
-              <tr>
-                <td>Measurements</td>
-                <td style={{ paddingLeft: 15 }}>{count}</td>
-              </tr>
-              <tr>
-                <td>Parameters</td>
-                <td style={{ paddingLeft: 15 }}>{formatParameters(parameters)}</td>
-              </tr>
-              <tr>
-                <td>Source</td>
-                <td style={{ paddingLeft: 15 }}>{sourceName}</td>
-              </tr>
-            </tbody>
-          </table>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <button className='btn-details'>View Details</button>
-          </div>
-        </div>
+    <li className='card'>
+      <h2 style={{ fontSize: 26 }}>{location}</h2>
+      <div>in <span style={{ fontWeight: 600, fontSize: 20, marginLeft: 5 }}>{city}</span></div>
+      <table>
+        <tbody>
+          <tr>
+            <td>Collection Dates</td>
+            <td style={{ paddingLeft: 15, paddingBottom: 10 }}>{formatDate(firstUpdated)} - {formatDate(lastUpdated)}</td>
+          </tr>
+          <tr>
+            <td>Measurements</td>
+            <td style={{ paddingLeft: 15, paddingBottom: 10  }}>{count}</td>
+          </tr>
+          <tr>
+            <td>Parameters</td>
+            <td style={{ paddingLeft: 15, paddingBottom: 10  }}>{formatParameters(parameters)}</td>
+          </tr>
+          <tr>
+            <td>Source</td>
+            <td style={{ paddingLeft: 15, paddingBottom: 10  }}>{sourceName}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div className='button-container'>
+        <button className='btn-details'>View Details</button>
+      </div>
     </li>
   );
 };
