@@ -1,5 +1,5 @@
 1. make sure i can get data from api x
 
-2  add parameter that user gets to select
-2. create static version of cards
+2  add parameter that user gets to select (start with city/sourcetype/lastupdated)
+2. create static version of cards, using data fetched in step 1
 3. add functionality to that data cards display corresponds to data fetched
