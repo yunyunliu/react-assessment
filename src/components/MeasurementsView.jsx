@@ -21,6 +21,7 @@ const MeasurementsView = ({ data, setId, formatDate }) => {
       return (
       <div className='measurements'>
         <header>
+          <button onClick={() => setId(null)}>Back to Results</button>
           <h1 style={{ fontSize: 48 }}>{location}</h1>
           <div>in <span style={{ fontSize: 24, marginLeft: 5 }}>{`${city}, ${country}`}</span></div>
         </header>

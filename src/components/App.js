@@ -8,7 +8,7 @@ function App() {
   const [source, setSource] = useState(null);
   const [limit, setLimit] = useState(null);
   const [data, setData] = useState(null);
-  const [isViewing, setIsViewing] = useState(212);
+  const [isViewing, setIsViewing] = useState(null);
 
   useEffect(() => {
     fetch(`https://docs.openaq.org/v1/locations?country=US&limit=${50}`)
