@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 
-import Results from './Results';
+import Card from './Card';
+import MeasurementsView from './MeasurementsView';
 
 function App() {
   const [source, setSource] = useState(null);
   const [limit, setLimit] = useState(null);
   const [data, setData] = useState(null);
-
+  const [isViewing, setIsViewing] = useState(null)
+;
   useEffect(() => {
     fetch(`https://docs.openaq.org/v1/locations?country=US&limit=${50}`)
       .then(res => res.json())
@@ -15,7 +17,6 @@ function App() {
         console.log(data.results);
         })
       .catch(err =>  console.log('request failed'))
-
   }, []);
 
   const handleClick = async e => {
@@ -31,6 +32,13 @@ function App() {
     }
   }
 
+  if (isViewing) {
+    console.log(isViewing)
+     const location = data.find(current => current.id === isViewing);
+    return (
+      <MeasurementsView data={location} />
+    );
+  }
   return (
     <div className='container'>
       <h1 style={{ marginLeft: 10 }}>Air Quality By Location</h1>
@@ -53,8 +61,13 @@ function App() {
         </select>
         <button>Go</button>
       </form>
-      { data ? <Results resultData={data} /> : null }
-
+      { data
+        ? (
+          <ul className='results'>
+            { data.map((location, i) => <Card cardData={location} key={i} setId={setIsViewing}/>) }
+          </ul>
+          )
+        : null }
     </div>
   );
 }

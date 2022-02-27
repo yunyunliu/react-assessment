@@ -1,5 +1,5 @@
-const Card = ({ cardData }) => {
-  const { location, city, firstUpdated, lastUpdated, count, parameters, sourceName } = cardData;
+const Card = ({ cardData, setId }) => {
+  const { location, city, firstUpdated, lastUpdated, count, parameters, sourceName, id } = cardData;
 
   const formatDate = dateString => {
     const formatted = dateString.split('T')[0];
@@ -36,7 +36,7 @@ const Card = ({ cardData }) => {
         </tbody>
       </table>
       <div className='button-container'>
-        <button className='btn-details'>View Details</button>
+        <button className='btn-details' onClick={() => setId(id)}>View Details</button>
       </div>
     </li>
   );
