@@ -33,8 +33,8 @@ function App() {
 
   return (
     <div className='container'>
-      <h1>Air Quality By Location</h1>
-      <form onSubmit={e => handleClick(e)}>
+      <h1 style={{ marginLeft: 10 }}>Air Quality By Location</h1>
+      <form style={{ marginLeft: 10 }} onSubmit={e => handleClick(e)}>
         <label htmlFor='limit' style={{ marginRight: 10 }}>Limit Results:</label>
         <select onChange={({ target }) => setLimit(target.value)} id='limit' style={{ marginRight: 10 }}>
           <option value=''> Limit </option>

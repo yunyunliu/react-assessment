@@ -48,6 +48,9 @@ const Results = ({ resultData }) => {
               </tr>
             </tbody>
           </table>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: 20 }}>
+            <button className='btn-details'>View Details</button>
+          </div>
         </div>
       </article>
       <article className='column-third card'>
