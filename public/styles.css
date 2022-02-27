@@ -68,6 +68,7 @@ table {
 
 .mid-panel {
   flex-basis: 50%;
+  min-width: 250px;
   border: 1px solid black;
   margin: 0 20px;
   padding: 20px;
@@ -77,4 +78,11 @@ table {
 .details {
   display: flex;
   margin-top: 20px;
+}
+
+.param-data {
+  margin-bottom: 10px;
+  flex-basis: calc(100% / 3);
+  /* width: calc(100% / 3); */
+  min-width: 150px;
 }

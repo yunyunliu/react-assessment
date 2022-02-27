@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import Measurement from './Measurement';
+
 const MeasurementsView = ({ data, setId, formatDate }) => {
   const { location, country, city, coordinates, count, lastUpdated, firstUpdated, sourceName, parameters} = data;
   const [measurements, setMeasurements] = useState(null);
@@ -10,11 +12,9 @@ const MeasurementsView = ({ data, setId, formatDate }) => {
     const recent = parameters.map(current => (
       fetch(url + '&parameter=' + current).then(data => data.json())
     ));
-
     Promise.all(recent)
         .then(dataArr => dataArr.map(current => current.results[0]))
         .then(resultArr => setMostRecent(resultArr));
-    // console.log('mostRecent', mostRecent)
 }, []);
 
   if (mostRecent && mostRecent.length > 0) {
@@ -27,22 +27,23 @@ const MeasurementsView = ({ data, setId, formatDate }) => {
         <div className='details'>
           <div className='panel'>
             <h3 style={{ marginTop: 0 }}>Details</h3>
-            <div>Measurements {count} </div>
-            <div>Coordinates {`${coordinates.latitude}, ${coordinates.longitude}`}</div>
+            <div>
+              <div style={{ fontSize: 20 }}> {count} </div>
+              <div>Measurements</div>
+            </div>
+            <div style={{ marginTop: 10, marginBottom: 10 }}>
+              <div>Coordinates</div>
+              <div>{`${coordinates.latitude}, ${coordinates.longitude}`}</div>
+            </div>
             <div>Project Collection Dates {`${formatDate(firstUpdated)} - ${formatDate(lastUpdated)}`}</div>
           </div>
           <div className='mid-panel'>
             <h3 style={{ marginTop: 0 }}>Latest Measurements</h3>
-            {
-            // mostRecent.map((current, i) => {
-            //   console.log('mostRecent', mostRecent)
-            //   return (
-            //   <div key={i}>{current.parameter}</div>
-            //   )})
-            console.log('most recent', mostRecent)
-
-
-              }
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+               { mostRecent.map((current, i) => (
+              <Measurement data={current} key={i} formatDate={formatDate}/>
+            )) }
+            </div>
           </div>
           <div className='panel'>
             <h3 style={{ marginTop: 0 }}>Source</h3>
