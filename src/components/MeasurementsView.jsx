@@ -3,24 +3,21 @@ import { useState, useEffect } from 'react';
 const MeasurementsView = ({ data, setId, formatDate }) => {
   const { location, country, city, coordinates, count, lastUpdated, firstUpdated, sourceName, parameters} = data;
   const [measurements, setMeasurements] = useState(null);
-  const [mostRecent, setMostRecent] = useState(null);
+  const [mostRecent, setMostRecent] = useState([]);
 
   useEffect(() => {
-    let url= 'https://docs.openaq.org/v1/measurements?limit=100&country=US&location=' +  location;
-    const recent = [];
-    const getMostRecent = () => {
-      parameters.forEach(async current => {
-        const res = await fetch(url + '&parameter=' + current);
-        const data = await res.json();
-        recent.push(data.results[0]);
-      });
-    }
-    getMostRecent();
-    setMostRecent(recent);
+    let url= 'https://docs.openaq.org/v1/measurements?limit=1&country=US&location=' +  location;
+    const recent = parameters.map(current => (
+      fetch(url + '&parameter=' + current).then(data => data.json())
+    ));
+
+    Promise.all(recent)
+        .then(dataArr => dataArr.map(current => current.results[0]))
+        .then(resultArr => setMostRecent(resultArr));
     // console.log('mostRecent', mostRecent)
 }, []);
 
-  // if (measurements) {
+  if (mostRecent && mostRecent.length > 0) {
       return (
       <div className='measurements'>
         <header>
@@ -36,7 +33,16 @@ const MeasurementsView = ({ data, setId, formatDate }) => {
           </div>
           <div className='mid-panel'>
             <h3 style={{ marginTop: 0 }}>Latest Measurements</h3>
-            {console.log('recent', mostRecent)}
+            {
+            // mostRecent.map((current, i) => {
+            //   console.log('mostRecent', mostRecent)
+            //   return (
+            //   <div key={i}>{current.parameter}</div>
+            //   )})
+            console.log('most recent', mostRecent)
+
+
+              }
           </div>
           <div className='panel'>
             <h3 style={{ marginTop: 0 }}>Source</h3>
@@ -45,8 +51,8 @@ const MeasurementsView = ({ data, setId, formatDate }) => {
         </div>
       </div>
     )
-  // }
-  // return null;
+  }
+  return null;
 
 };
 
