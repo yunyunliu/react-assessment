@@ -3,7 +3,7 @@
 1. Clone the repository.
 
  ```shell
-    https://github.com/yunyunliu/react-assessment.git
+    git clone https://github.com/yunyunliu/react-assessment.git
     cd react-assessment
   ```
 2. Install all dependencies with NPM.
