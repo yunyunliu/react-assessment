@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 
 import Measurement from './Measurement';
-import TestChart from './TestChart';
+import LineGraph from './LineGraph';
+// import ScatterPlot from './ScatterPlot';
 
 const MeasurementsView = ({ data, setId, formatDate, getTime }) => {
   // console.log(data)
@@ -27,7 +28,7 @@ const MeasurementsView = ({ data, setId, formatDate, getTime }) => {
           <h1 style={{ fontSize: 48 }}>{location}</h1>
           <div>in <span style={{ fontSize: 24, marginLeft: 5 }}>{`${city}, ${country}`}</span></div>
         </header>
-        <TestChart formatDate={formatDate} getTime={getTime}/>
+        <LineGraph />
         <div className='details'>
           <div className='panel'>
             <h3 style={{ marginTop: 0 }}>Details</h3>
@@ -58,7 +59,6 @@ const MeasurementsView = ({ data, setId, formatDate, getTime }) => {
     )
   }
   return null;
-
 };
 
 export default MeasurementsView;
