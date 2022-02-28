@@ -5,6 +5,7 @@ const Card = ({ cardData, setId, formatDate }) => {
     const results = params.join(', ');
     return results;
   };
+
   return (
     <li className='card'>
       <h2 style={{ fontSize: 26 }}>{location}</h2>
@@ -30,7 +31,7 @@ const Card = ({ cardData, setId, formatDate }) => {
         </tbody>
       </table>
       <div className='button-container'>
-        <button className='btn-details' onClick={() => setId(id)}>View Details</button>
+        <button onClick={() => setId(id)}>View Details</button>
       </div>
     </li>
   );

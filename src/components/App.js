@@ -45,7 +45,6 @@ function App() {
       const data = await res.json();
       setData(data.results);
       setTitle('Results');
-      // console.log(data.results);
     } else {
       console.log('request failed');
     }
@@ -53,7 +52,6 @@ function App() {
 
   const renderView = () => {
     if (data && isViewing) {
-      // console.log(isViewing)
       const location = data.find(current => current.id === isViewing);
       return (
         <MeasurementsView data={location} formatDate={formatDate} setId={setIsViewing} />
@@ -66,9 +64,12 @@ function App() {
           <Results title={title} data={data} formatDate={formatDate} setViewing={setIsViewing}/>
         </>
       )
+    } else {
+      return (
+        <h1>loading</h1>
+      )
     }
   }
-
 
   return (
     <div className='container'>

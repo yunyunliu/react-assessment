@@ -30,8 +30,6 @@
   flex-basis: 30%;
   min-width: 250px;
   position: relative;
-  /* justify-content: space-evenly; */
-  /* box-shadow: 5px 0px 23px 1px #A1DAF4; */
 }
 
 button:hover {
@@ -46,12 +44,6 @@ table {
   display: flex;
   justify-content: flex-end;
 }
-
-/* .btn-details {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-} */
 
 .measurements {
   display: flex;
@@ -83,6 +75,5 @@ table {
 .param-data {
   margin-bottom: 10px;
   flex-basis: calc(100% / 3);
-  /* width: calc(100% / 3); */
   min-width: 150px;
 }

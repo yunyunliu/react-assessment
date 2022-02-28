@@ -1,6 +1,4 @@
-const Filter = ({ handleClick, setData, setLimit, setSource }) => {
-
-  return (
+const Filter = ({ handleClick, setData, setLimit, setSource }) => (
     <>
      <h1 style={{ marginLeft: 10 }}>Air Quality By Location</h1>
       <form style={{ marginLeft: 10 }} onSubmit={e => handleClick(e)}>
@@ -23,7 +21,6 @@ const Filter = ({ handleClick, setData, setLimit, setSource }) => {
         <button>Go</button>
       </form>
     </>
-  )
-};
+  );
 
 export default Filter;
