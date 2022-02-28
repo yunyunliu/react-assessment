@@ -16,7 +16,6 @@ function App() {
       .then(res => res.json())
       .then(data => {
         setData(data.results);
-        // console.log(data.results);
         })
       .catch(err =>  console.log('request failed'))
   }, []);
@@ -60,7 +59,7 @@ function App() {
     if (data) {
       return (
         <>
-          <Filter handleClick={handleClick} setLimit={setLimit} setSource={setSource} />
+          <Filter handleClick={handleClick} setLimit={setLimit} setSource={setSource} limit={limit} source={source} />
           <Results title={title} data={data} formatDate={formatDate} setViewing={setIsViewing}/>
         </>
       )
