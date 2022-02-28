@@ -1,12 +1,7 @@
-const Measurement = ({ data, formatDate }) => {
+const Measurement = ({ data, formatDate, getTime }) => {
   const { parameter, value, unit, date } = data;
   // console.log(parameter, data)
 
-  const getTime = dateTime => {
-    const time = dateTime.split('T')[1];
-
-    return time.slice(0, time.length - 4);
-  }
   return (
     <div className='param-data'>
       <div style={{ fontSize: 20 }}>{parameter === 'pm25' ? 'PM2.5' : parameter.toUpperCase()}</div>

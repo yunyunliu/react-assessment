@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 
 import Measurement from './Measurement';
+import TestChart from './TestChart';
 
-const MeasurementsView = ({ data, setId, formatDate }) => {
+const MeasurementsView = ({ data, setId, formatDate, getTime }) => {
+  // console.log(data)
   const { location, country, city, coordinates, count, lastUpdated, firstUpdated, sourceName, parameters} = data;
-  const [measurements, setMeasurements] = useState(null);
+  // const [measurements, setMeasurements] = useState(null);
   const [mostRecent, setMostRecent] = useState([]);
 
   useEffect(() => {
@@ -25,6 +27,7 @@ const MeasurementsView = ({ data, setId, formatDate }) => {
           <h1 style={{ fontSize: 48 }}>{location}</h1>
           <div>in <span style={{ fontSize: 24, marginLeft: 5 }}>{`${city}, ${country}`}</span></div>
         </header>
+        <TestChart formatDate={formatDate} getTime={getTime}/>
         <div className='details'>
           <div className='panel'>
             <h3 style={{ marginTop: 0 }}>Details</h3>
@@ -42,7 +45,7 @@ const MeasurementsView = ({ data, setId, formatDate }) => {
             <h3 style={{ marginTop: 0 }}>Latest Measurements</h3>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                { mostRecent.map((current, i) => (
-              <Measurement data={current} key={i} formatDate={formatDate}/>
+              <Measurement data={current} key={i} formatDate={formatDate} getTime={getTime}/>
             )) }
             </div>
           </div>

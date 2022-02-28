@@ -8,7 +8,7 @@ function App() {
   const [source, setSource] = useState(null);
   const [limit, setLimit] = useState(null);
   const [data, setData] = useState(null);
-  const [isViewing, setIsViewing] = useState(null);
+  const [isViewing, setIsViewing] = useState(259);
 
   useEffect(() => {
     fetch(`https://docs.openaq.org/v1/locations?country=US&limit=${50}`)
@@ -21,10 +21,15 @@ function App() {
   }, []);
 
   const formatDate = dateString => {
-  const formatted = dateString.split('T')[0];
-  const replaced = formatted.replaceAll('-', '/');
-  return replaced;
-};
+    const formatted = dateString.split('T')[0];
+    const replaced = formatted.replaceAll('-', '/');
+    return replaced;
+  };
+
+  const getTime = dateTime => {
+    const time = dateTime.split('T')[1];
+    return time.slice(0, time.length - 4);
+  }
 
  const handleClick = async e => {
     e.preventDefault();
@@ -44,7 +49,7 @@ function App() {
       // console.log(isViewing)
       const location = data.find(current => current.id === isViewing);
       return (
-        <MeasurementsView data={location} formatDate={formatDate} setId={setIsViewing} />
+        <MeasurementsView data={location} formatDate={formatDate} setId={setIsViewing} getTime={getTime}/>
       );
     }
     if (data) {
