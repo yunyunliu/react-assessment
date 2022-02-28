@@ -1,5 +1,5 @@
 const Card = ({ cardData, setId, formatDate }) => {
-  const { location, city, firstUpdated, lastUpdated, count, parameters, sourceName, id } = cardData;
+  const { location, city, firstUpdated, lastUpdated, count, parameters, sourceName, id, sourceType } = cardData;
 
   const formatParameters = params => {
     const results = params.join(', ');
@@ -10,6 +10,7 @@ const Card = ({ cardData, setId, formatDate }) => {
     <li className='card'>
       <h2 style={{ fontSize: 26 }}>{location}</h2>
       <div>in <span style={{ fontWeight: 600, fontSize: 20, marginLeft: 5 }}>{city}</span></div>
+      <div style={{ marginTop: 15 }}>{sourceType.toUpperCase()}</div>
       <table>
         <tbody>
           <tr>

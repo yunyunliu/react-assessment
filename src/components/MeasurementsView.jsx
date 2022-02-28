@@ -4,7 +4,6 @@ import Measurement from './Measurement';
 
 const MeasurementsView = ({ data, setId, formatDate }) => {
   const { location, country, city, coordinates, count, lastUpdated, firstUpdated, sourceName, parameters} = data;
-  const [measurements, setMeasurements] = useState(null);
   const [mostRecent, setMostRecent] = useState([]);
 
   useEffect(() => {
