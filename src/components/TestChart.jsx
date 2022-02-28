@@ -39,7 +39,7 @@ const TestChart = ({ formatDate, getTime }) => {
   }
 
   return (
-    <Scatter data={data} options={options} />
+    // <Scatter data={data} options={options} />
   );
 };
 

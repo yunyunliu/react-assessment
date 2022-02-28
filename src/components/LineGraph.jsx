@@ -1,62 +1,92 @@
-import React, { Component } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 
+const LineGraph = ({ parameter }) => {
+    const chartContainer = useRef(null);
+    const [chartInstance, setChartInstance] = useState(null);
+    const [rawData, setRawData] = useState(null);
+    const [xAxisLabels, setXAxisLabels] = useState(null);
+    const [formattedData, setFormattedData] = useState(null);
+    // const myChartRef = this.chartRef.current.getContext("2d");
 
-class LineGraph extends Component {
-    chartRef = React.createRef();
 
-    componentDidMount() {
-        const myChartRef = this.chartRef.current.getContext("2d");
-
-        new Chart(myChartRef, {
-            type: "scatter",
-            data: {
-                //Bring in data
-                datasets: [
-                    {
-                        label: "Parameter: PM10",
-                        data: [{x: "2022-02-27T16:00:00-06:00", y: 21}, {x: "2022-02-27T15:00:00-06:00", y: 27}, {x: "2022-02-27T14:00:00-06:00", y: 17}],
-                        backgroundColor: 'rgb(255, 99, 132)'
+    useEffect(() => {
+        // get measurement data from api
+        fetch('https://docs.openaq.org/v1/measurements?country=US&location=Troost&parameter=pm10')
+            .then(res => res.json())
+            .then(result => {
+                const data = result.results;
+                setRawData(data);
+                const formatted = data.map(current => {
+                    return { x: current.date.local, y: current.value };
+                });
+                setFormattedData(formatted);
+                const labels = [];
+                data.forEach(current => {
+                    const timestamp = current.date.utc;
+                    const date = timestamp.split('T')[0]; // date portion of timestamp without time
+                    if (!labels.includes(date)) {
+                        labels.push(date);
                     }
-                ]
-            },
-            options: {
-                //Customize chart options
-                scales: {
-                    x: {
-                        type: 'time',
-                        labels: ["2022-02-27T16:00:00-06:00", "2022-02-26T23:00:00-06:00", "2022-02-25T23:00:00-06:00", "2022-02-24T23:00:00-06:00", "2022-02-23T23:00:00-06:00"],
-                        time: {
-                            unit: 'day'
-                        },
-                        title: {
-                            display: true,
-                            text: 'Date'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'PM10'
-                        }
+                });
+                setXAxisLabels(labels);
+            });
+    }, []);
 
-                    }
+    // get all unique dates from dataset to use as labels in chart
 
-                }
-            }
-        });
-    }
-    render() {
+     // data and options for chart
+        // const chartConfigs = {
+        //     type: 'scatter',
+        //     data: {
+        //         datasets: [
+        //             {
+        //                 // label: "Parameter: " + parameter.toUpperCase(),
+        //                 data: formattedData,
+        //                 backgroundColor: 'rgb(255, 99, 132)'
+        //             }
+        //         ]
+        //     },
+        //     options: {
+        //         scales: {
+        //             x: {
+        //                 type: 'time',
+        //                 labels: getLabels(rawData),
+        //                 time: { unit: 'day' },
+        //                 title: {
+        //                     display: true,
+        //                     text: 'Date'
+        //                 }
+        //             },
+        //             y: {
+        //                 title: {
+        //                     display: true,
+        //                     // text: parameter.toUpperCase()
+        //                 },
+        //                 ticks: { beginAtZero: true }
+        //             }
+        //         }
+        //     }
+        // }
+     // create chart
+    // if (chartContainer && chartContainer.current) {
+    //     const newChart = new Chart(chartContainer.current, chartConfigs);
+    //     setChartInstance(newChart);
+    //     newChart.update();
+    // }
+    if (rawData) {
         return (
             <div>
+                {console.log(xAxisLabels)}
                 <canvas
                     id="myChart"
-                    ref={this.chartRef}
+                    ref={chartContainer}
                 />
             </div>
-        )
+        );
     }
+    return null;
 }
 
 export default LineGraph
