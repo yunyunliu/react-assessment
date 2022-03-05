@@ -1,14 +1,20 @@
 const Card = ({ cardData, setId, formatDate }) => {
-  const { location, city, firstUpdated, lastUpdated, count, parameters, sourceName, id } = cardData;
+  const { name, firstUpdated, lastUpdated, measurements, parameters, sources, id, entity, sensorType } = cardData;
 
   const formatParameters = params => {
-    const results = params.join(', ');
-    return results;
+    const displayNames = params.map(param => param.displayName);
+    const paramList = displayNames.join(', ');
+    return paramList;
   };
+
+  const sourceInfo = sources[0];
+
+
   return (
     <li className='card'>
-      <h2 style={{ fontSize: 26 }}>{location}</h2>
-      <div>in <span style={{ fontWeight: 600, fontSize: 20, marginLeft: 5 }}>{city}</span></div>
+      {/* {console.log(cardData)} */}
+      <h2 style={{ fontSize: 26 }}>{name}</h2>
+      <div><span className="label">{entity}</span><span className="label">{sensorType}</span></div>
       <table>
         <tbody>
           <tr>
@@ -17,7 +23,7 @@ const Card = ({ cardData, setId, formatDate }) => {
           </tr>
           <tr>
             <td>Measurements</td>
-            <td style={{ paddingLeft: 15, paddingBottom: 10  }}>{count}</td>
+            <td style={{ paddingLeft: 15, paddingBottom: 10  }}>{measurements}</td>
           </tr>
           <tr>
             <td>Parameters</td>
@@ -25,7 +31,7 @@ const Card = ({ cardData, setId, formatDate }) => {
           </tr>
           <tr>
             <td>Source</td>
-            <td style={{ paddingLeft: 15, paddingBottom: 10  }}>{sourceName}</td>
+            <td style={{ paddingLeft: 15, paddingBottom: 10  }}>{<a href={sourceInfo.url}>{sourceInfo.name}</a>}</td>
           </tr>
         </tbody>
       </table>

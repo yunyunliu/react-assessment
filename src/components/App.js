@@ -11,7 +11,7 @@ function App() {
   const [isViewing, setIsViewing] = useState(null);
 
   useEffect(() => {
-    fetch(`https://docs.openaq.org/v1/locations?country=US&limit=${50}`)
+    fetch(`https://docs.openaq.org/v2/locations?country=US&limit=${50}`)
       .then(res => res.json())
       .then(data => {
         setData(data.results);
@@ -33,7 +33,7 @@ function App() {
  const handleClick = async e => {
     e.preventDefault();
     // const res = await fetch(`https://docs.openaq.org/v1/locations?country=US&limit=${parseInt(limit) + 20}&entity=${source}`);
-    const res = await fetch(`https://docs.openaq.org/v1/locations?country=US&limit=${50}`);
+    const res = await fetch(`https://docs.openaq.org/v2/locations?country=US&limit=${50}`);
     if (res.ok) {
       const data = await res.json();
       setData(data.results);
