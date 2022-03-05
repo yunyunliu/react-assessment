@@ -36,7 +36,7 @@ const ScatterPlot = ({ parameter }) => {
                     data: {
                         datasets: [
                             {
-                                // label: "Parameter: " + parameter.toUpperCase(),
+                                label: "Parameter: " + parameter.toUpperCase(),
                                 data: formatChartData(data),
                                 backgroundColor: 'rgb(255, 99, 132)'
                             }
@@ -53,7 +53,7 @@ const ScatterPlot = ({ parameter }) => {
                             y: {
                                 title: {
                                     display: true,
-                                    // text: parameter.toUpperCase()
+                                    text: parameter.toUpperCase()
                                 },
                                 ticks: { beginAtZero: true }
                             }

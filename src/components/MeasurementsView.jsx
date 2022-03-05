@@ -6,7 +6,6 @@ import ScatterPlot from './ScatterPlot';
 const MeasurementsView = ({ data, setId, formatDate, getTime }) => {
   // console.log(data)
   const { location, country, city, coordinates, count, lastUpdated, firstUpdated, sourceName, parameters} = data;
-  // const [measurements, setMeasurements] = useState(null);
   const [mostRecent, setMostRecent] = useState([]);
 
   useEffect(() => {
@@ -27,7 +26,6 @@ const MeasurementsView = ({ data, setId, formatDate, getTime }) => {
           <h1 style={{ fontSize: 48 }}>{location}</h1>
           <div>in <span style={{ fontSize: 24, marginLeft: 5 }}>{`${city}, ${country}`}</span></div>
         </header>
-        <ScatterPlot paramter={'pm10'}/>
         <div className='details'>
           <div className='panel'>
             <h3 style={{ marginTop: 0 }}>Details</h3>
@@ -54,6 +52,7 @@ const MeasurementsView = ({ data, setId, formatDate, getTime }) => {
             <div>{sourceName}</div>
           </div>
         </div>
+        <ScatterPlot parameter={parameters[0]}/>
       </div>
     )
   }

@@ -8,14 +8,13 @@ function App() {
   const [source, setSource] = useState(null);
   const [limit, setLimit] = useState(null);
   const [data, setData] = useState(null);
-  const [isViewing, setIsViewing] = useState(259);
+  const [isViewing, setIsViewing] = useState(null);
 
   useEffect(() => {
     fetch(`https://docs.openaq.org/v1/locations?country=US&limit=${50}`)
       .then(res => res.json())
       .then(data => {
         setData(data.results);
-        // console.log(data.results);
         })
       .catch(err =>  console.log('request failed'))
   }, []);
@@ -38,7 +37,6 @@ function App() {
     if (res.ok) {
       const data = await res.json();
       setData(data.results);
-      // console.log(data.results);
     } else {
       console.log('request failed');
     }
@@ -46,7 +44,6 @@ function App() {
 
   const renderView = () => {
     if (data && isViewing) {
-      // console.log(isViewing)
       const location = data.find(current => current.id === isViewing);
       return (
         <MeasurementsView data={location} formatDate={formatDate} setId={setIsViewing} getTime={getTime}/>
